@@ -1,5 +1,5 @@
 
-<!-- Post Layout Start -->
+<!-- Blog Layout Start -->
 
 <!DOCTYPE html>
 <html lang="{{ site.lang }}">
@@ -14,20 +14,13 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
 
-          <h1><strong>{{ page.title }}</strong></h1>
-          <h4><strong>{{ page.date | date_to_string }}</strong>
-            <small> . {{ page.category }} . <a href="{{site.baseurl}}{{page.url }}#disqus_thread">Comments</a>
-            {% for tag in page.tags %}
-              <a href="{{site.baseurl}}/tags/{{tag}}.html">#{{ tag }}</a>
-            {% endfor %}
-            </small>
-          </h4>
+        {{ page.content | markdownify }}
 
-          {{ page.content | markdownify }}
+        {% for post in paginator.posts %}
+          <h4 align="left"><strong>{{ post.date | date_to_string }}</strong> <small>. {{ post.category }} .</small> <a href="{{site.baseurl}}{{post.url}}"> <strong>{{ post.title }} </strong> </a> <small><a href="{{site.baseurl}}{{post.url}}#disqus_thread">Comments</a></small></h4>
+        {% endfor %}
 
-          {% include share.html %}
-
-          {% include comments.html %}
+        {% include pagination.html %}
 
         </div>
       </div>
@@ -48,4 +41,4 @@
   </body>
 </html>
 
-<!-- Post Layout End -->
+<!-- Blog Layout End -->

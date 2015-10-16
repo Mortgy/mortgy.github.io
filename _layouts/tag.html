@@ -1,5 +1,5 @@
 
-<!-- Post Layout Start -->
+<!-- Tag Layout Start -->
 
 <!DOCTYPE html>
 <html lang="{{ site.lang }}">
@@ -14,20 +14,20 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
 
-          <h1><strong>{{ page.title }}</strong></h1>
-          <h4><strong>{{ page.date | date_to_string }}</strong>
-            <small> . {{ page.category }} . <a href="{{site.baseurl}}{{page.url }}#disqus_thread">Comments</a>
-            {% for tag in page.tags %}
-              <a href="{{site.baseurl}}/tags/{{tag}}.html">#{{ tag }}</a>
-            {% endfor %}
-            </small>
-          </h4>
+          <div id="archives">
+            <div>
+              {% assign tag = page.title %}
 
-          {{ page.content | markdownify }}
+              <h3 id="#{{ tag }}">#{{ tag }}</h3>
 
-          {% include share.html %}
+              {% for post in site.posts %}
+                {% if post.tags contains tag %}
+                  <h4 align="left"><strong>{{ post.date | date_to_string }}</strong> <small>. {{ post.category }} .</small> <a href="{{site.baseurl}}{{ post.url }}"> <strong>{{ post.title }} </a> </strong> <small><a href="{{site.baseurl}}{{post.url}}#disqus_thread">Comments</a></small></h4>
+                {% endif %}
+              {% endfor %}
 
-          {% include comments.html %}
+            </div>
+          </div>
 
         </div>
       </div>
@@ -48,4 +48,4 @@
   </body>
 </html>
 
-<!-- Post Layout End -->
+<!-- Tag Layout End -->
